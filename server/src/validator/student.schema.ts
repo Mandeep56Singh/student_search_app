@@ -10,5 +10,10 @@ export const studentSearchSchema = z.object({
         /^[a-zA-Z\s]+$/,
         "Search query must contain only letters and spaces"
       ),
+    offset: z
+      .string()
+      .transform((val) => parseInt(val, 10))
+      .refine((val) => val > 0, "Offset must be a positive number")
+      .optional(),
   }),
 });

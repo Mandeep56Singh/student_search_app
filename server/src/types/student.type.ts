@@ -3,3 +3,8 @@ export type StudentType = {
   class: number;
   rollNumber: number;
 };
+
+export type StudentQueryType = {
+    searchQuery: string,
+    offset?: number
+}
