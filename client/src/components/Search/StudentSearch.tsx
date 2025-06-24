@@ -1,22 +1,18 @@
 import type { StudentType } from "@/types/student.types";
-
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import studentData from "../../data/students_data.json";
+import StudentDetailsDailog from "../Detials/StudentDetailsDailog";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
 import { Input } from "../ui/input";
 import { SearchItem } from "./SearchItem";
 export const StudentSearch = () => {
   const [query, setQuery] = useState<string>("");
   const [data, setData] = useState<StudentType[]>([]);
-
+  const [isDailogOpen, setIsDailogOpen] = useState<boolean>(false);
+  const [selectedStudent, setSelectedStudent] = useState<StudentType | null>(
+    null
+  );
   useEffect(() => {
     const timerId = setTimeout(() => {
       if (query.length >= 3) {
@@ -51,36 +47,19 @@ export const StudentSearch = () => {
           <div className="py-2">
             {data.length ? (
               data.map((student) => (
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <button className="w-full text-start">
-                      <SearchItem
-                        key={`${student.rollNumber}`}
-                        name={student.name}
-                        rollNumber={student.rollNumber}
-                      />
-                    </button>
-                  </DialogTrigger>
-                  <DialogContent className="p-2 ">
-                    <DialogHeader>
-                      <DialogTitle className="text-center">
-                        Student Details
-                      </DialogTitle>
-                    </DialogHeader>
-                    <div className="flex justify-center gap-8 ">
-                      <div className="flex flex-col gap-2 ">
-                        <div className="font-medium">Name</div>
-                        <div className="font-medium">Roll No</div>
-                        <div className="font-medium">Class</div>
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <div className="">{student.name}</div>
-                        <div className="">{student.rollNumber}</div>
-                        <div className="">{student.class}</div>
-                      </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
+                <button
+                  key={`${student.rollNumber}`}
+                  className="w-full text-start"
+                  onClick={() => {
+                    setSelectedStudent(student);
+                    setIsDailogOpen(true);
+                  }}
+                >
+                  <SearchItem
+                    name={student.name}
+                    rollNumber={student.rollNumber}
+                  />
+                </button>
               ))
             ) : (
               <div className="text-sm text-gray-500 dark:text-gray-400 px-4">
@@ -90,6 +69,11 @@ export const StudentSearch = () => {
           </div>
         </div>
       ) : null}
+      <StudentDetailsDailog
+        student={selectedStudent}
+        isOpen={isDailogOpen}
+        setIsOpen={setIsDailogOpen}
+      ></StudentDetailsDailog>
     </div>
   );
 };
