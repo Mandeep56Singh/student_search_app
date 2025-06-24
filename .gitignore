@@ -1,7 +1,13 @@
 # Ignore server dependencies
 server/node_modules/
+client/node_modules
 
 # Build output
 server/dist/
+client/dist/
 server/build/
+client/build/
 *.tsbuildinfo
+
+#environment variables
+server/.env
