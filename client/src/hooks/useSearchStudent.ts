@@ -1,5 +1,5 @@
 import type { StudentType } from "@/types/student.types";
-import axios, { isAxiosError } from "axios";
+import axios, { isAxiosError, isCancel } from "axios";
 import { useEffect, useState } from "react";
 
 const api_url = import.meta.env.VITE_API_URL;
@@ -39,11 +39,15 @@ export const useSearchStudent = (query: string) => {
 
         setStudentsData(data.students);
       } catch (err) {
-        if (isAxiosError(err)) {
+        if (isCancel(err)) {
+          console.error("aborted", err);
+          setError(null);
+        } else if (isAxiosError(err)) {
           const msg = err.response?.data?.errors?.[0]?.message ?? err.message;
           setError(msg);
         } else {
           setError("Unexpected Error");
+          console.error("unexpected Error", err);
         }
       } finally {
         setLoading(false);
