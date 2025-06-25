@@ -2,7 +2,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 import statusMonitor from "express-status-monitor";
-import studentRouter from "./routes/student.route";
+import studentRouter from "./routes/student.route.js";
+
 
 dotenv.config();
 

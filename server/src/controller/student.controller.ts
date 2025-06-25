@@ -1,6 +1,6 @@
 import { Request, RequestHandler, Response } from "express";
-import * as studentService from "../service/student.service";
-import { StudentQueryType } from "../types/student.type";
+import * as studentService from "../service/student.service.js";
+import { StudentQueryType } from "../types/student.type.js";
 
 export const searchStudent = async (
   req: Request,

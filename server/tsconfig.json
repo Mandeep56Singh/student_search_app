@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "module": "es2020", 
-    "moduleResolution": "node", // Resolve modules like Node.js
+    "module": "nodenext", 
+    "moduleResolution": "nodenext", // Resolve modules like Node.js
     "esModuleInterop": true, 
     "resolveJsonModule": true, // Allow importing JSON files
     "outDir": "./dist", // Output directory
