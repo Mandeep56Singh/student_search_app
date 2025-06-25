@@ -1,19 +1,18 @@
 import type { StudentType } from "@/types/student.types";
 import axios, { isAxiosError } from "axios";
 import { useEffect, useState } from "react";
-import { useDebounce } from "./useDebounce";
+
 const api_url = import.meta.env.VITE_API_URL;
 type StudentsResponse = {
   students: StudentType[];
 };
 export const useSearchStudent = (query: string) => {
-  const debouncedQuery = useDebounce(query, 300);
   const [studentsData, setStudentsData] = useState<StudentType[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (debouncedQuery.length < 3) {
+    if (query.length < 3) {
       setStudentsData([]);
       setError(null);
       setLoading(false);
@@ -32,7 +31,7 @@ export const useSearchStudent = (query: string) => {
           `${api_url}/search`,
           {
             params: {
-              searchQuery: debouncedQuery,
+              searchQuery: query,
             },
             signal,
           }
@@ -52,7 +51,7 @@ export const useSearchStudent = (query: string) => {
     };
     fetchData();
     return () => controller.abort();
-  }, [debouncedQuery]);
+  }, [query]);
 
   return { data: studentsData, loading, error };
 };
