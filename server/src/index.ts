@@ -6,8 +6,13 @@ import studentRouter from "./routes/student.route";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000;
-const ORIGIN = process.env.ORIGIN;
+const { PORT, ORIGIN, NODE_ENV } = process.env;
+
+if (!PORT || !ORIGIN || !NODE_ENV) {
+  console.error("Provide all environmeent variables");
+  process.exit(1);
+}
+
 const app = express();
 
 // Middlewares
@@ -19,7 +24,9 @@ app.use(
 );
 
 app.use(express.json());
-app.use(statusMonitor());
+if (NODE_ENV === "development") {
+  app.use(statusMonitor());
+}
 
 // routes
 app.get("/", (_res: Request, res: Response) => {
