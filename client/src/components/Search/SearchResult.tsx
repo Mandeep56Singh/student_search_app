@@ -26,10 +26,6 @@ const SearchResult: React.FC<SearchResultsProps> = ({
     );
   }
 
-  if (error) {
-    return <div className="text-sm text-red-400 px-4 py-2">{error}</div>;
-  }
-
   if (queryLength < 3) {
     return (
       <div className="text-sm text-gray-500 dark:text-gray-400 px-4 py-2 ">
@@ -37,11 +33,16 @@ const SearchResult: React.FC<SearchResultsProps> = ({
       </div>
     );
   }
+  if (error) {
+    return <div className="text-sm text-red-400 px-4 py-2">{error}</div>;
+  }
 
   if (!data.length) {
-    <div className="text-sm text-gray-500 dark:text-gray-400 px-4 py-2">
-      No Students Found
-    </div>;
+    return (
+      <div className="text-sm text-gray-500 dark:text-gray-400 px-4 py-2">
+        No Students Found
+      </div>
+    );
   }
 
   return (
