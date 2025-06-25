@@ -14,8 +14,10 @@ export const searchStudent = async (
   return new Promise((resolve, reject) => {
     const matches: StudentType[] = [];
 
-    const filePath = path.resolve(import.meta.dirname, "../data/student_data.json");
-
+    const filePath = path.resolve(
+      import.meta.dirname,
+      "../data/student_data.json"
+    );
 
     const pipeline = chain([
       fs.createReadStream(filePath),
