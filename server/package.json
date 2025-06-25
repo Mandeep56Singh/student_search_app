@@ -21,9 +21,7 @@
     "stream-json": "^1.9.1",
     "tsx": "^4.20.3",
     "typescript": "^5.4.5",
-    "zod": "^3.25.67"
-  },
-  "devDependencies": {
+    "zod": "^3.25.67",
     "@types/cors": "^2.8.19",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.3",
