@@ -3,8 +3,11 @@ import path from "path";
 import { chain } from "stream-chain";
 import streamJson from "stream-json";
 import streamArrayMod from "stream-json/streamers/StreamArray";
+import { fileURLToPath } from "url";
 import { StudentType } from "../types/student.type";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const parser = streamJson.parser;
 const streamArray = streamArrayMod.streamArray;
 export const searchStudent = async (
@@ -14,10 +17,7 @@ export const searchStudent = async (
   return new Promise((resolve, reject) => {
     const matches: StudentType[] = [];
 
-    const filePath = path.resolve(
-      import.meta.dirname,
-      "../data/student_data.json"
-    );
+    const filePath = path.resolve(__dirname, "../data/student_data.json");
 
     const pipeline = chain([
       fs.createReadStream(filePath),

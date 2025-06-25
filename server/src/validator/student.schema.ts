@@ -12,8 +12,8 @@ export const studentSearchSchema = z.object({
       ),
     offset: z
       .string()
-      .transform((val) => parseInt(val, 10))
-      .refine((val) => val > 0, "Offset must be a positive number")
+      .transform((val: string) => parseInt(val, 10))
+      .refine((val: number) => val > 0, "Offset must be a positive number")
       .optional(),
   }),
 });

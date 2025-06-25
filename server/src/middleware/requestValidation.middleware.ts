@@ -15,7 +15,7 @@ export const validateRequest =
       });
 
       next();
-    } catch (err) {
+    } catch (err:unknown) {
       console.error("Caught error:", err);
       if (err instanceof ZodError) {
         res.status(400).json({
