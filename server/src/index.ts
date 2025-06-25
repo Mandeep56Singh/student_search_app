@@ -1,3 +1,4 @@
+import cors from "cors";
 import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 import studentRouter from "./routes/student.route";
@@ -5,9 +6,17 @@ import studentRouter from "./routes/student.route";
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
+const ORIGIN = process.env.ORIGIN;
 const app = express();
 
 // Middlewares
+app.use(
+  cors({
+    origin: ORIGIN,
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 // routes
