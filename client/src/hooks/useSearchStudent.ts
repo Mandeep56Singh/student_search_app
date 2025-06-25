@@ -17,6 +17,7 @@ export const useSearchStudent = (query: string) => {
       setStudentsData([]);
       setError(null);
       setLoading(false);
+      return;
     }
 
     const controller = new AbortController();
